@@ -10,6 +10,7 @@
 import Foundation
 
 extension NSObject {
+    
     public func observe<T>(for observable: MutableObservable<T>, with: @escaping (T) -> ()) {
         observable.bind { _, value  in
             DispatchQueue.main.async {
@@ -17,4 +18,5 @@ extension NSObject {
             }
         }
     }
+    
 }

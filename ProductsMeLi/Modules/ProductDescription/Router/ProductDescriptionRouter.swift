@@ -8,7 +8,7 @@
 import UIKit
 
 enum ProductDescriptionTransition {
-    case showProductWeb
+    case showProductWeb(productUrl: String)
 }
 
 class ProductDescriptionRouter {
@@ -21,19 +21,19 @@ class ProductDescriptionRouter {
     
     func handle(transition attendanceTransition: ProductDescriptionTransition) {
         switch attendanceTransition {
-        case .showProductWeb:
-            showProductWebViewController()
+        case let .showProductWeb(productUrl):
+            showProductWebViewController(productUrl: productUrl)
         }
         
     }
     
     // MARK: - Private Methods
     
-    private func showProductWebViewController() {
+    private func showProductWebViewController(productUrl: String) {
         guard let viewController = viewController else {
             return
         }
-        ProductWebFactory.showProductWebViewController(from: viewController)
+        ProductWebFactory.showProductWebViewController(from: viewController, productUrl: productUrl)
 
     }
     

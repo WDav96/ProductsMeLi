@@ -14,6 +14,14 @@ class ProductWebView: UIView {
     
     private var webView: WKWebView!
     
+    // MARK: - Internal Properties
+    
+    var productUrl: String? {
+        didSet {
+            load(url: productUrl ?? "https://www.mercadolibre.com.co")
+        }
+    }
+    
     // MARK: - Private Properties
     
     private let webViewPrefs = WKWebpagePreferences()
@@ -26,7 +34,6 @@ class ProductWebView: UIView {
         backgroundColor = .white
         setupWebView()
         addSubViews()
-        load(url: "https://www.mercadolibre.com.co")
     }
     
     required init?(coder: NSCoder) {

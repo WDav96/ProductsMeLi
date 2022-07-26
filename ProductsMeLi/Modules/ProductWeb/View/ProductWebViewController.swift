@@ -16,6 +16,14 @@ class ProductWebViewController: UIViewController {
     
     // MARK: - Lifecycle ViewController Methods
     
+    // MARK: - Internal Properties
+    
+    var productUrl: String? {
+        didSet {
+            productWebView.productUrl = productUrl
+        }
+    }
+    
     override func loadView() {
         super.loadView()
         view = productWebView

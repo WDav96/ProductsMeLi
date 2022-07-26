@@ -7,7 +7,8 @@
 
 import UIKit
 
-extension UITextField : Bindable {
+extension UITextField: Bindable {
+    
     public typealias BindingType = String
     
     public func observingValue() -> String? {
@@ -19,9 +20,11 @@ extension UITextField : Bindable {
             self.text = value
         }
     }
+    
 }
 
 extension UISwitch : Bindable {
+    
     public typealias BindingType = Bool
     
     public func observingValue() -> Bool? {
@@ -31,9 +34,11 @@ extension UISwitch : Bindable {
     public func updateValue(with value: Bool) {
         self.isOn = value
     }
+    
 }
 
 extension UISlider : Bindable {
+    
     public typealias BindingType = Float
     
     public func observingValue() -> Float? {
@@ -43,9 +48,11 @@ extension UISlider : Bindable {
     public func updateValue(with value: Float) {
         self.value = value
     }
+    
 }
 
 extension UIStepper : Bindable {
+    
     public typealias BindingType = Double
     
     public func observingValue() -> Double? {
@@ -55,9 +62,11 @@ extension UIStepper : Bindable {
     public func updateValue(with value: Double) {
         self.value = value
     }
+    
 }
 
 extension UISegmentedControl : Bindable {
+    
     public typealias BindingType = Int
     
     public func observingValue() -> Int? {
@@ -67,9 +76,11 @@ extension UISegmentedControl : Bindable {
     public func updateValue(with value: Int) {
         self.selectedSegmentIndex = value
     }
+    
 }
 
 public class BindableTextView: UITextView, Bindable, UITextViewDelegate {
+    
     public typealias BindingType = String
     
     public func observingValue() -> String? {
@@ -93,4 +104,5 @@ public class BindableTextView: UITextView, Bindable, UITextViewDelegate {
     public func textViewDidChange(_ textView: UITextView) {
         self.valueChanged()
     }
+    
 }

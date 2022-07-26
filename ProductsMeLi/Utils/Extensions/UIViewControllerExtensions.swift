@@ -33,4 +33,11 @@ extension UIViewController {
         }
     }
     
+    func showAlert(error: String) {
+        let alert  = UIAlertController(title: "Error!", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Accept", style: .default))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }

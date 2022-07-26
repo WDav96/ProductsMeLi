@@ -13,12 +13,12 @@ final class ImageService {
 
     // MARK: - Public API
     
-    func image(for url: URL, completion: @escaping (UIImage?) -> Void) {
+    func image(for url: URL, completionHandler: @escaping (UIImage?) -> Void) {
         if let imageData = images.object(forKey: url.absoluteString as NSString) {
             print("Using cached images")
             
             guard let image = UIImage(data: imageData as Data) else { return }
-            completion(image)
+            completionHandler(image)
             
             return
         }
@@ -30,7 +30,7 @@ final class ImageService {
             defer {
                 
                 DispatchQueue.main.async {
-                    completion(image)
+                    completionHandler(image)
                 }
             }
 

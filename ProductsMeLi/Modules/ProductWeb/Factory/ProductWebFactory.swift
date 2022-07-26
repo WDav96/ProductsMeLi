@@ -9,16 +9,18 @@ import UIKit
 
 enum ProductWebFactory {
     
-    static func getProductWebViewController() -> ProductWebViewController {
+    static func getProductWebViewController(productUrl: String) -> ProductWebViewController {
         // viewController
         let viewController = ProductWebViewController()
+        
+        viewController.productUrl = productUrl
         
         return viewController
     }
     
-    static func showProductWebViewController(from originViewController: UIViewController) {
-        let viewController = getProductWebViewController()
-        originViewController.navigationController?.pushViewController(viewController, animated: true)
+    static func showProductWebViewController(from originViewController: UIViewController, productUrl: String) {
+        let viewController = getProductWebViewController(productUrl: productUrl)
+        originViewController.present(viewController, animated: true, completion: nil)
     }
     
 }

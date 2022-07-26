@@ -7,7 +7,11 @@
 
 import Foundation
 
-class SearchProductRepository {
+protocol SearchProductRepositoryProtocol {
+    func getProducts(productName: String) async throws -> ProductResponse
+}
+
+class SearchProductRepository: SearchProductRepositoryProtocol {
     
     // MARK: - Internal Methods
     

@@ -22,9 +22,8 @@ class ProductDescriptionViewModel {
     
     // MARK: - Private Methods
     
-    func goToProductWebView() {
-        router.handle(transition: .showProductWeb)
-        print("---------->Tapped")
+    func goToProductWebView(productUrl: String) {
+        router.handle(transition: .showProductWeb(productUrl: productUrl))
     }
     
     

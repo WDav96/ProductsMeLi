@@ -15,7 +15,7 @@ class ProductDescriptionView: UIView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 40
+        stackView.spacing = 20
         return stackView
     }()
     
@@ -46,7 +46,7 @@ class ProductDescriptionView: UIView {
         return label
     }()
     
-    private var seeMoreButton: UIButton = {
+    private lazy var seeMoreButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Ver más", for: .normal)
@@ -55,18 +55,29 @@ class ProductDescriptionView: UIView {
         return button
     }()
     
+    private var relatedProductLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Productos relacionados"
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 25, weight: .semibold)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
     private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(ProductTableViewCell.self, forCellReuseIdentifier: ProductTableViewCell.name)
+        tableView.register(RelatedTableViewCell.self, forCellReuseIdentifier: RelatedTableViewCell.name)
         return tableView
     }()
     
     // MARK: - Internal Properties
     
-    var products: [Product] = [] {
+    var product: Product? {
         didSet {
-            updateTableView()
+            setupView()
         }
     }
     
@@ -76,11 +87,11 @@ class ProductDescriptionView: UIView {
     private var imageService = ImageService()
     
     // MARK: - Internal Observable Properties
-    var onTapSeeMoreButtonObservable: Observable<Void> {
+    var onTapSeeMoreButtonObservable: Observable<String> {
         onTapSeeMoreButton
     }
     
-    private var onTapSeeMoreButton = MutableObservable<Void>()
+    private var onTapSeeMoreButton = MutableObservable<String>()
     
     // MARK: - Initializers
     
@@ -109,7 +120,7 @@ class ProductDescriptionView: UIView {
     
     @objc
     private func seeMoreButtonAction(sender: UIButton!) {
-        onTapSeeMoreButton.postValue(())
+        onTapSeeMoreButton.postValue((product?.productUrl))
     }
     
     private func addSubViews() {
@@ -118,6 +129,7 @@ class ProductDescriptionView: UIView {
         containerStackView.addArrangedSubview(productImageView)
         containerStackView.addArrangedSubview(priceProductLabel)
         containerStackView.addArrangedSubview(seeMoreButton)
+        containerStackView.addArrangedSubview(relatedProductLabel)
         addSubview(tableView)
         
         addConstraints()
@@ -147,16 +159,11 @@ class ProductDescriptionView: UIView {
         
     }
     
-    private func updateTableView() {
-        adapter.products = products
-        setupView()
-    }
-    
     private func setupView() {
-        /*nameProductLabel.text = product?.title
+        nameProductLabel.text = product?.title
         priceProductLabel.text = "$ \(product?.price ?? 0) COP"
         let url = product?.image ?? ""
-        setupImage(url: url)*/
+        setupImage(url: url)
     }
     
     private func setupImage(url: String) {

@@ -17,7 +17,7 @@ class SearchProductViewModel {
     
     // MARK: - Internal Properties
     
-    var repository: SearchProductRepository
+    var repository: SearchProductRepositoryProtocol
     var router: SearchProductRouter
     var products: [Product] = []
     
@@ -36,7 +36,7 @@ class SearchProductViewModel {
     
     // MARK: - Initializers
     
-    init(repository: SearchProductRepository, router: SearchProductRouter) {
+    init(repository: SearchProductRepositoryProtocol, router: SearchProductRouter) {
         self.repository = repository
         self.router = router
         searchText.observe { [weak self] text in self?.getProducts(productName: text) }
@@ -69,8 +69,8 @@ class SearchProductViewModel {
         }
     }
     
-    func goToProductDescription(products: [Product]) {
-        router.handle(transition: .showProductDescription(products: products))
+    func goToProductDescription(product: Product, products: [Product]) {
+        router.handle(transition: .showProductDescription(product: product, products: products))
     }
 
 }

@@ -55,8 +55,8 @@ class SearchProductViewController: UIViewController {
         // view To viewModel
         searchProductView.publicSearchProductTextField.bind(with: viewModel.searchText)
         
-        adapter.didSelectItemAt.observe { [unowned self] products in
-            self.goToProductDescription(products: products)
+        adapter.didSelectItemAt.observe { [unowned self] product, products in
+            self.goToProductDescription(product: product, products: products)
         }
     }
     
@@ -71,7 +71,7 @@ class SearchProductViewController: UIViewController {
         case .didGetData:
             updateTableView()
         case .errorMessage(let error):
-            print(error)
+            showAlert(error: error)
         }
     }
     
@@ -80,8 +80,8 @@ class SearchProductViewController: UIViewController {
         searchProductView.reloadTableViewData()
     }
     
-    private func goToProductDescription(products: [Product]) {
-        viewModel.goToProductDescription(products: products)
+    private func goToProductDescription(product: Product, products: [Product]) {
+        viewModel.goToProductDescription(product: product, products: products)
     }
 
 }

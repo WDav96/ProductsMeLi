@@ -8,7 +8,7 @@
 import UIKit
 
 enum SearchProductTransition {
-    case showProductDescription(products: [Product])
+    case showProductDescription(product: Product, products: [Product])
 }
 
 class SearchProductRouter {
@@ -21,19 +21,19 @@ class SearchProductRouter {
     
     func handle(transition attendanceTransition: SearchProductTransition) {
         switch attendanceTransition {
-        case let .showProductDescription(products):
-            showProductDescriptionViewController(products: products)
+        case let .showProductDescription(product, products):
+            showProductDescriptionViewController(product: product, products: products)
         }
         
     }
     
     // MARK: - Private Methods
     
-    private func showProductDescriptionViewController(products: [Product]) {
+    private func showProductDescriptionViewController(product: Product, products: [Product]) {
         guard let viewController = viewController else {
             return
         }
-        ProductDescriptionFactory.showProductDescriptionViewController(from: viewController, products: products)
+        ProductDescriptionFactory.showProductDescriptionViewController(from: viewController, product: product, products: products)
 
     }
     

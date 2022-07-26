@@ -19,6 +19,12 @@ class ProductDescriptionViewController: UIViewController {
     
     // MARK: - Internal Properties
     
+    var product: Product? {
+        didSet {
+            productDescriptionView.product = product
+        }
+    }
+    
     var products: [Product] = [] {
         didSet {
             updateTableView()
@@ -57,14 +63,16 @@ class ProductDescriptionViewController: UIViewController {
     // MARK: - Private Methods
 
     private func setupBindings() {
-        productDescriptionView.onTapSeeMoreButtonObservable.observe { [unowned self] in
-            viewModel.goToProductWebView()
+        productDescriptionView.onTapSeeMoreButtonObservable.observe { [unowned self] productUrl in
+            viewModel.goToProductWebView(productUrl: productUrl)
             
         }
     }
     
     private func updateTableView() {
-        adapter.products = products
+        let tenProducts = products[0...9]
+        adapter.products = tenProducts.filter( { $0.title != product?.title })
+        
         productDescriptionView.reloadTableViewData()
     }
 
