@@ -13,16 +13,6 @@ class ProductDescriptionAdapter: NSObject {
     
     var products: [Product] = []
     
-    // MARK: - Internal Observable Properties
-    
-    var didSelectItemAt: Observable<Product> {
-        mutableDidSelectItemAt
-    }
-    
-    // MARK: - Private Observable Properties
-    
-    private var mutableDidSelectItemAt = MutableObservable<Product>()
-    
 }
 
 // MARK: - UITableViewDataSource

@@ -65,10 +65,6 @@ class ProductDescriptionViewController: UIViewController {
     private func setupBindings() {
         productDescriptionView.onTapSeeMoreButtonObservable.observe { [unowned self] productUrl in
             viewModel.goToProductWebView(productUrl: productUrl)
-            
-        }
-        adapter.didSelectItemAt.observe { [unowned self] _ in
-            print("diddSelectRowAt")
         }
     }
     
