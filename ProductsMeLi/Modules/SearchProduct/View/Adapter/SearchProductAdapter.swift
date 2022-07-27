@@ -16,12 +16,12 @@ class SearchProductAdapter: NSObject {
     // MARK: - Internal Observable Properties
     
     var didSelectItemAt: Observable<(Product, [Product])> {
-        mutableDidSelectItemAt
+        didSelectItemAtMutableObservable
     }
     
     // MARK: - Private Observable Properties
     
-    private var mutableDidSelectItemAt = MutableObservable<(Product, [Product])>()
+    private var didSelectItemAtMutableObservable = MutableObservable<(Product, [Product])>()
     
 }
 
@@ -45,7 +45,7 @@ extension SearchProductAdapter: UITableViewDataSource {
 extension SearchProductAdapter: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        mutableDidSelectItemAt.postValue((products[indexPath.row], products))
+        didSelectItemAtMutableObservable.postValue((products[indexPath.row], products))
     }
     
 }

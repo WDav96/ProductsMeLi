@@ -37,12 +37,12 @@ class ProductWebView: UIView {
     
     // MARK: - Internal Observable Properties
     var onTapCloseButtonObservable: Observable<Void> {
-        onTapCloseButton
+        onTapCloseButtonMutableObservable
     }
     
     // MARK: - Private Observable Properties
     
-    private var onTapCloseButton = MutableObservable<Void>()
+    private var onTapCloseButtonMutableObservable = MutableObservable<Void>()
     
     // MARK: - Initializers
     
@@ -87,7 +87,7 @@ class ProductWebView: UIView {
     
     @objc
     private func closeButtonAction() {
-        onTapCloseButton.postValue(())
+        onTapCloseButtonMutableObservable.postValue(())
     }
 
 }

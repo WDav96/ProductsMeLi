@@ -13,6 +13,16 @@ class ProductDescriptionAdapter: NSObject {
     
     var products: [Product] = []
     
+    // MARK: - Internal Observable Properties
+    
+    var didTappedCell: Observable<[Product]> {
+        didTappedCellMutableObservable
+    }
+    
+    // MARK: - Private Observable Properties
+    
+    private var didTappedCellMutableObservable = MutableObservable<[Product]>()
+
 }
 
 // MARK: - UITableViewDataSource
@@ -26,6 +36,9 @@ extension ProductDescriptionAdapter: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RelatedTableViewCell.name, for: indexPath) as? RelatedTableViewCell else { return
             UITableViewCell() }
         cell.products = products
+        cell.didSelectItemAtObservable.observe { [unowned self] products in
+            self.didTappedCellMutableObservable.postValue(products)
+        }
         
         return cell
     }

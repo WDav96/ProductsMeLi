@@ -66,6 +66,10 @@ class ProductDescriptionViewController: UIViewController {
         productDescriptionView.onTapSeeMoreButtonObservable.observe { [unowned self] productUrl in
             viewModel.goToProductWebView(productUrl: productUrl)
         }
+        adapter.didTappedCell.observe { [unowned self] products in
+            print(products)
+            
+        }
     }
     
     private func updateTableView() {

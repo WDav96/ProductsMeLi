@@ -13,6 +13,16 @@ class RelatedCollectionViewAdapter: NSObject {
     
     var products: [Product] = []
     
+    // MARK: - Internal Observable Properties
+    
+    var didSelectItemAtObservable: Observable<[Product]> {
+        didSelecItemAtMutableObservable
+    }
+    
+    // MARK: - Private Observable Properties
+    
+    private var didSelecItemAtMutableObservable = MutableObservable<[Product]>()
+    
 }
 
 // MARK: - UICollectionViewDataSource
@@ -37,6 +47,10 @@ extension RelatedCollectionViewAdapter: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: UIScreen.main.bounds.width - 30, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelecItemAtMutableObservable.postValue(products)
     }
     
 }

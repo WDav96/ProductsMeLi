@@ -87,13 +87,14 @@ class ProductDescriptionView: UIView {
     private var imageService = ImageService()
     
     // MARK: - Internal Observable Properties
+    
     var onTapSeeMoreButtonObservable: Observable<String> {
-        onTapSeeMoreButton
+        onTapSeeMoreButtonMutableObservable
     }
     
     // MARK: - Private Observable Properties
     
-    private var onTapSeeMoreButton = MutableObservable<String>()
+    private var onTapSeeMoreButtonMutableObservable = MutableObservable<String>()
     
     // MARK: - Initializers
     
@@ -158,7 +159,7 @@ class ProductDescriptionView: UIView {
     
     @objc
     private func seeMoreButtonAction(sender: UIButton!) {
-        onTapSeeMoreButton.postValue((product?.productUrl))
+        onTapSeeMoreButtonMutableObservable.postValue((product?.productUrl))
     }
     
     private func setupView() {

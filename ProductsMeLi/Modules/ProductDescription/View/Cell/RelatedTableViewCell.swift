@@ -38,6 +38,16 @@ class RelatedTableViewCell: UITableViewCell {
         }
     }
     
+    // MARK: - Internal Observable Properties
+    
+    var didSelectItemAtObservable: Observable<[Product]> {
+        didSelecItemAtMutableObservable
+    }
+    
+    // MARK: - Private Observable Properties
+    
+    private var didSelecItemAtMutableObservable = MutableObservable<[Product]>()
+    
     // MARK: - Private Properties
     
     private var adapter = RelatedCollectionViewAdapter()
@@ -47,6 +57,7 @@ class RelatedTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubViews()
+        setupBindings()
     }
     
     required init?(coder: NSCoder) {
@@ -68,6 +79,13 @@ class RelatedTableViewCell: UITableViewCell {
         collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    }
+    
+    private func setupBindings() {
+        adapter.didSelectItemAtObservable.observe { [unowned self] products in
+            self.didSelecItemAtMutableObservable.postValue(products)
+            
+        }
     }
     
     private func updateCollectionView() {
