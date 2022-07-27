@@ -23,6 +23,7 @@ Se implementó MVVM como arquitectura, con las siguientes capas:
 - La pantalla principal muestra un listado de productos obtenidos de la API de Mercado Libre.
 - Cuando se selecciona un producto se direcciona al detalle de este.
 - La pantalla del detalle cuenta con un botón que dirige a una web view con el sitio web del producto en Mercado Libre.
+- La pantalla del detalle tiene una sección de productos recomendados que al seleccionar alguno nos direcciona al sitio web del mismo.
 - Hay un activity indicator que se muestra cuando se está realizando una petición al servicio web
 - Hay una alerta que se muestra cuando en el proceso de obtención de datos ocurre un error
 
