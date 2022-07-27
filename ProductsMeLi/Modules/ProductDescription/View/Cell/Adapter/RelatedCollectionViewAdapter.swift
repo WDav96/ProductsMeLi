@@ -15,13 +15,13 @@ class RelatedCollectionViewAdapter: NSObject {
     
     // MARK: - Internal Observable Properties
     
-    var didSelectItemAtObservable: Observable<[Product]> {
+    var didSelectItemAtObservable: Observable<String> {
         didSelecItemAtMutableObservable
     }
     
     // MARK: - Private Observable Properties
     
-    private var didSelecItemAtMutableObservable = MutableObservable<[Product]>()
+    private var didSelecItemAtMutableObservable = MutableObservable<String>()
     
 }
 
@@ -50,7 +50,8 @@ extension RelatedCollectionViewAdapter: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelecItemAtMutableObservable.postValue(products)
+        let productUrl = products[indexPath.row].productUrl
+        didSelecItemAtMutableObservable.postValue(productUrl)
     }
     
 }

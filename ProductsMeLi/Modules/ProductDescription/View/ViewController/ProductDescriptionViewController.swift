@@ -66,14 +66,13 @@ class ProductDescriptionViewController: UIViewController {
         productDescriptionView.onTapSeeMoreButtonObservable.observe { [unowned self] productUrl in
             viewModel.goToProductWebView(productUrl: productUrl)
         }
-        adapter.didTappedCell.observe { [unowned self] products in
-            print(products)
-            
+        adapter.didTappedCell.observe { [unowned self] productUrl in
+            viewModel.goToProductWebView(productUrl: productUrl)
         }
     }
     
     private func updateTableView() {
-        let tenProducts = products[0...9]
+        let tenProducts = products[0...]
         adapter.products = tenProducts.filter( { $0.title != product?.title })
         
         productDescriptionView.reloadTableViewData()

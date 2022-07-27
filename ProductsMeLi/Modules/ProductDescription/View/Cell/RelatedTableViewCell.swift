@@ -40,13 +40,13 @@ class RelatedTableViewCell: UITableViewCell {
     
     // MARK: - Internal Observable Properties
     
-    var didSelectItemAtObservable: Observable<[Product]> {
+    var didSelectItemAtObservable: Observable<String> {
         didSelecItemAtMutableObservable
     }
     
     // MARK: - Private Observable Properties
     
-    private var didSelecItemAtMutableObservable = MutableObservable<[Product]>()
+    private var didSelecItemAtMutableObservable = MutableObservable<String>()
     
     // MARK: - Private Properties
     
@@ -82,8 +82,8 @@ class RelatedTableViewCell: UITableViewCell {
     }
     
     private func setupBindings() {
-        adapter.didSelectItemAtObservable.observe { [unowned self] products in
-            self.didSelecItemAtMutableObservable.postValue(products)
+        adapter.didSelectItemAtObservable.observe { [unowned self] productUrl in
+            self.didSelecItemAtMutableObservable.postValue(productUrl)
             
         }
     }
