@@ -26,5 +26,4 @@ class ProductDescriptionViewModel {
         router.handle(transition: .showProductWeb(productUrl: productUrl))
     }
     
-    
 }

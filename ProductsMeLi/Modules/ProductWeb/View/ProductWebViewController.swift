@@ -31,10 +31,18 @@ class ProductWebViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupBindings()
     }
     
     // MARK: - Private Methods
+
+    private func setupBindings() {
+        productWebView.onTapCloseButtonObservable.observe { [unowned self] _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.dismiss(animated:true, completion: nil)
+            }
+        }
+    }
     
 
 }

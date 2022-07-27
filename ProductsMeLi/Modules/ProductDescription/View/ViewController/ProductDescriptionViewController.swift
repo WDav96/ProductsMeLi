@@ -67,6 +67,9 @@ class ProductDescriptionViewController: UIViewController {
             viewModel.goToProductWebView(productUrl: productUrl)
             
         }
+        adapter.didSelectItemAt.observe { [unowned self] _ in
+            print("diddSelectRowAt")
+        }
     }
     
     private func updateTableView() {

@@ -91,6 +91,8 @@ class ProductDescriptionView: UIView {
         onTapSeeMoreButton
     }
     
+    // MARK: - Private Observable Properties
+    
     private var onTapSeeMoreButton = MutableObservable<String>()
     
     // MARK: - Initializers
@@ -117,11 +119,6 @@ class ProductDescriptionView: UIView {
     }
     
     // MARK: - Private Methods
-    
-    @objc
-    private func seeMoreButtonAction(sender: UIButton!) {
-        onTapSeeMoreButton.postValue((product?.productUrl))
-    }
     
     private func addSubViews() {
         addSubview(containerStackView)
@@ -157,6 +154,11 @@ class ProductDescriptionView: UIView {
         tableView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
+    }
+    
+    @objc
+    private func seeMoreButtonAction(sender: UIButton!) {
+        onTapSeeMoreButton.postValue((product?.productUrl))
     }
     
     private func setupView() {
